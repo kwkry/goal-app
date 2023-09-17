@@ -5,10 +5,10 @@ import {
   Button,
   TextInput,
   ImageBackground,
-  ScrollView,
   FlatList,
 } from "react-native";
 import { useState } from "react";
+import GoalItem from "./components/GoalItem";
 
 function App() {
   const [enteredGoalText, setEnteredGoalText] = useState("");
@@ -52,11 +52,7 @@ function App() {
           <FlatList
             data={courseGoals}
             renderItem={(itemData) => {
-              return (
-                <Text key={itemData.item} style={styles.textBox}>
-                  {itemData.item.text}
-                </Text>
-              );
+              return <GoalItem text={itemData.item.text} />;
             }}
           />
         </View>
@@ -101,14 +97,6 @@ const styles = StyleSheet.create({
   textContainer: {
     flex: 6,
     paddingHorizontal: 8,
-  },
-  textBox: {
-    borderRadius: 15,
-    backgroundColor: "#28282B",
-    color: "white",
-    padding: 10,
-    fontSize: 15,
-    marginBottom: 4,
   },
 });
 
