@@ -7,12 +7,25 @@ import {
   ImageBackground,
   FlatList,
 } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
 function App() {
   const [courseGoals, setCourseGoals] = useState([]);
+  const [initialRender, setInitialRender] = useState(true);
+
+  useEffect(() => {
+    if (initialRender) {
+      const initialGoals = Array.from({ length: 1000 }, (_, index) => ({
+        text: `Goal ${index + 1}`,
+        key: Math.random().toString(),
+      }));
+
+      setCourseGoals(initialGoals);
+      setInitialRender(false);
+    }
+  }, [initialRender]);
 
   function addGoalHandler(enteredGoalText) {
     setCourseGoals((currentCourseGoals) => [
@@ -27,7 +40,7 @@ function App() {
       style={styles.imageStyle}
     >
       <View style={styles.appContainer}>
-        <GoalInput onAddGoal={addGoalHandler}/>
+        <GoalInput onAddGoal={addGoalHandler} />
         <View style={styles.goalsContainer}>
           <Text style={styles.labelBox}>List of Goals</Text>
         </View>
@@ -37,6 +50,11 @@ function App() {
             renderItem={(itemData) => {
               return <GoalItem text={itemData.item.text} />;
             }}
+            maxToRenderPerBatch={10}
+            windowSize={21}
+            updateCellsBatchingPeriod={5000}
+            initialNumToRender={10}
+            removeClippedSubviews={true}
           />
         </View>
       </View>
@@ -53,7 +71,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     flex: 1,
   },
-  
+
   goalsContainer: {
     paddingBottom: 5,
   },
@@ -67,6 +85,7 @@ const styles = StyleSheet.create({
   textContainer: {
     flex: 6,
     paddingHorizontal: 8,
+    paddingBottom: 150,
   },
 });
 
