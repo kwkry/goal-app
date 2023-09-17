@@ -5,6 +5,7 @@ import {
   Button,
   TextInput,
   ImageBackground,
+  ScrollView,
 } from "react-native";
 import { useState } from "react";
 
@@ -44,11 +45,13 @@ function App() {
           <Text style={styles.labelBox}>List of Goals</Text>
         </View>
         <View style={styles.textContainer}>
+          <ScrollView>
           {courseGoals.map((goal, index) => (
             <Text key={index} style={styles.textBox}>
               {goal}
             </Text>
           ))}
+          </ScrollView>
         </View>
       </View>
     </ImageBackground>
