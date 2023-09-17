@@ -3,11 +3,14 @@ import { useState } from "react";
 
 function App() {
   const [enteredGoalText, setEnteredGoalText] = useState("");
+  const [courseGoals, setCourseGoals] = useState([]);
+
   function goalInputHandler(enteredText) {
     setEnteredGoalText(enteredText);
   }
 
-  function addGoalHandler() {
+  function addGoalHandler(currentCourseGoals) {
+    setCourseGoals((currentCourseGoals) => [...courseGoals, enteredGoalText]);
   }
 
   return (
@@ -22,6 +25,9 @@ function App() {
       </View>
       <View style={styles.goalsContainer}>
         <Text>List of Goals:</Text>
+        {courseGoals.map((goal) => (
+          <Text key={goal}>{goal}</Text>
+        ))}
       </View>
     </View>
   );
