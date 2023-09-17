@@ -6,6 +6,7 @@ import {
   TextInput,
   ImageBackground,
   ScrollView,
+  FlatList,
 } from "react-native";
 import { useState } from "react";
 
@@ -18,7 +19,10 @@ function App() {
   }
 
   function addGoalHandler(currentCourseGoals) {
-    setCourseGoals((currentCourseGoals) => [...courseGoals, enteredGoalText]);
+    setCourseGoals((currentCourseGoals) => [
+      ...courseGoals,
+      { text: enteredGoalText, key: Math.random().toString() },
+    ]);
     setEnteredGoalText("");
   }
 
@@ -45,13 +49,16 @@ function App() {
           <Text style={styles.labelBox}>List of Goals</Text>
         </View>
         <View style={styles.textContainer}>
-          <ScrollView>
-          {courseGoals.map((goal, index) => (
-            <Text key={index} style={styles.textBox}>
-              {goal}
-            </Text>
-          ))}
-          </ScrollView>
+          <FlatList
+            data={courseGoals}
+            renderItem={(itemData) => {
+              return (
+                <Text key={itemData.item} style={styles.textBox}>
+                  {itemData.item.text}
+                </Text>
+              );
+            }}
+          />
         </View>
       </View>
     </ImageBackground>
