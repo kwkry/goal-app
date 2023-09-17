@@ -1,9 +1,9 @@
 import {Text, StyleSheet} from 'react-native';   
 
-function GoalItem() {
+function GoalItem(goalItemProp) {
   return (
-    <Text key={itemData.item} style={styles.textBox}>
-      {itemData.item.text}
+    <Text style={styles.textBox}>
+      {goalItemProp.text}
     </Text>
   );
 }
