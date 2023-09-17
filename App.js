@@ -11,6 +11,7 @@ function App() {
 
   function addGoalHandler(currentCourseGoals) {
     setCourseGoals((currentCourseGoals) => [...courseGoals, enteredGoalText]);
+    setEnteredGoalText("");
   }
 
   return (
@@ -20,13 +21,14 @@ function App() {
           placeholder="Your Course Goal"
           style={styles.textInput}
           onChangeText={goalInputHandler}
+          value={enteredGoalText}
         />
         <Button title="Add Goal" onPress={addGoalHandler}></Button>
       </View>
       <View style={styles.goalsContainer}>
         <Text>List of Goals:</Text>
-        {courseGoals.map((goal) => (
-          <Text key={goal}>{goal}</Text>
+        {courseGoals.map((goal, index) => (
+          <Text key={index}>{goal}</Text>
         ))}
       </View>
     </View>
