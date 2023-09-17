@@ -1,15 +1,7 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  ImageBackground,
-  FlatList,
-} from "react-native";
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
 import { useState, useEffect } from "react";
-import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
+import GoalItemList from "./components/GoalListItems";
 
 function App() {
   const [courseGoals, setCourseGoals] = useState([]);
@@ -45,17 +37,7 @@ function App() {
           <Text style={styles.labelBox}>List of Goals</Text>
         </View>
         <View style={styles.textContainer}>
-          <FlatList
-            data={courseGoals}
-            renderItem={(itemData) => {
-              return <GoalItem text={itemData.item.text} />;
-            }}
-            maxToRenderPerBatch={10}
-            windowSize={21}
-            updateCellsBatchingPeriod={5000}
-            initialNumToRender={10}
-            removeClippedSubviews={true}
-          />
+          <GoalItemList goalListData={courseGoals} />
         </View>
       </View>
     </ImageBackground>
