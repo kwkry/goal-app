@@ -7,17 +7,17 @@ function App() {
   const [courseGoals, setCourseGoals] = useState([]);
   const [initialRender, setInitialRender] = useState(true);
 
-  useEffect(() => {
-    if (initialRender) {
-      const initialGoals = Array.from({ length: 1000 }, (_, index) => ({
-        text: `Goal ${index + 1}`,
-        key: Math.random().toString(),
-      }));
+  // useEffect(() => {
+  //   if (initialRender) {
+  //     const initialGoals = Array.from({ length: 1000 }, (_, index) => ({
+  //       text: `Goal ${index + 1}`,
+  //       key: Math.random().toString(),
+  //     }));
 
-      setCourseGoals(initialGoals);
-      setInitialRender(false);
-    }
-  }, [initialRender]);
+  //     setCourseGoals(initialGoals);
+  //     setInitialRender(false);
+  //   }
+  // }, [initialRender]);
 
   function addGoalHandler(enteredGoalText) {
     setCourseGoals((currentCourseGoals) => [
